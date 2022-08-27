@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 
-import { handleSelecionar, isSelecionado } from "../../contexto/ProdutosSelecionados/ProdutosSelecionadosProvider.jsx"
-
 import { Card } from '@components';
 
 import styles from './ListaCards.module.css';
