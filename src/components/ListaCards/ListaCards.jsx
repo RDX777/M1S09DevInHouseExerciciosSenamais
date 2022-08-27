@@ -1,25 +1,13 @@
 import PropTypes from 'prop-types';
 
+import { useProdutosSelecionados } from "../../contexto/ProdutosSelecionados/useProdutosSelecionados.jsx"
+
 import { Card } from '@components';
 
 import styles from './ListaCards.module.css';
-import { useState } from 'react';
 
 export const ListaCards = ({ produtos }) => {
-  const [selecionados, setSelecionados] = useState([]);
-
-  const isSelecionado = (id) => {
-    return selecionados.some((item) => item === id);
-  };
-
-  const handleSelecionar = (id) => {
-    if (isSelecionado(id)) {
-      setSelecionados(selecionados.filter((item) => item !== id));
-      return;
-    }
-
-    setSelecionados([...selecionados, id]);
-  };
+  const { isSelecionado, handleSelecionar } = useProdutosSelecionados()
 
   return (
     <ul className={styles.lista}>
@@ -28,7 +16,7 @@ export const ListaCards = ({ produtos }) => {
           <Card
             produto={produto}
             selecionado={isSelecionado(produto.id)}
-            onSelecionar={handleSelecionar}
+            onSelecionar={() => {handleSelecionar(produto)}}
           />
         </li>
       ))}
