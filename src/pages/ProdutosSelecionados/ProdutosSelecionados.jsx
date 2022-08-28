@@ -2,8 +2,10 @@ import { useProdutosSelecionados } from "../../contexto/ProdutosSelecionados/use
 
 import { ListaCards } from "../../components/ListaCards/ListaCards.jsx";
 
+import styles from './ProdutosSelecionados.module.css';
+
 export const ProdutosSelecionados = () => {
-  const { produtosSelecionados } = useProdutosSelecionados();
+  const { produtosSelecionados, limparSelecionados } = useProdutosSelecionados();
 
   const somaProdutos = produtosSelecionados.reduce((valorInicial, proximoValor) => {
     return valorInicial + proximoValor.valor
@@ -13,6 +15,11 @@ export const ProdutosSelecionados = () => {
     <>
       <h1>Produtos Selecionados</h1>
       <p>Total dos Produtos: R$ {somaProdutos}</p>
+      <button 
+        onClick={limparSelecionados}
+        className={styles.botao}>
+          Limpar produtos
+      </button>
       <ListaCards produtos={produtosSelecionados} />
     </>
   )

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import { ProdutosSelecionadosContext } from './ProdutosSelecionadosContext'
 
 export const ProdutosSelecionadosProvider = ({ children }) => {
-  const [produtosSelecionados, setProdutosSelecionados] = useState([]);
+  const [produtosSelecionados, setProdutosSelecionados] = useState([])
+
+  const limparSelecionados = () => {
+    setProdutosSelecionados([])
+  }
 
   const isSelecionado = (id) => {
     return produtosSelecionados.some((item) => item.id === id);
@@ -20,7 +24,7 @@ export const ProdutosSelecionadosProvider = ({ children }) => {
 
   return (
     <>
-      <ProdutosSelecionadosContext.Provider value={{ produtosSelecionados, handleSelecionar, isSelecionado}}>
+      <ProdutosSelecionadosContext.Provider value={{ limparSelecionados, produtosSelecionados, handleSelecionar, isSelecionado}}>
         {children}
       </ProdutosSelecionadosContext.Provider>
     </>
