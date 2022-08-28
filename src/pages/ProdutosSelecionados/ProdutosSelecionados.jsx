@@ -1,10 +1,14 @@
-export const ProdutosSelecionados = () => {
+import { useProdutosSelecionados } from "../../contexto/ProdutosSelecionados/useProdutosSelecionados.jsx"
 
-  const tituloProdutosSelecionados = "teste"
+import { ListaCards } from "../../components/ListaCards/ListaCards.jsx";
+
+export const ProdutosSelecionados = () => {
+  const { produtosSelecionados } = useProdutosSelecionados();
 
   return (
     <>
-      <h1>{tituloProdutosSelecionados}</h1>
+      <h1>Produtos Selecionados</h1>
+      <ListaCards produtos={produtosSelecionados} />
     </>
   )
 }

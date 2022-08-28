@@ -20,7 +20,7 @@ export const ProdutosSelecionadosProvider = ({ children }) => {
 
   return (
     <>
-      <ProdutosSelecionadosContext.Provider value={{handleSelecionar, isSelecionado}}>
+      <ProdutosSelecionadosContext.Provider value={{ produtosSelecionados, handleSelecionar, isSelecionado}}>
         {children}
       </ProdutosSelecionadosContext.Provider>
     </>
