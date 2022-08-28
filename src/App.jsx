@@ -1,62 +1,24 @@
-import { Footer, Header, Secao, FiltroSecao } from '@components';
-import { produtos } from '@services';
-import { useState } from 'react';
+import { Footer, Header } from '@components';
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from "./router/Router.jsx"
+
 import styles from './App.module.css';
 
 import { ProdutosSelecionadosProvider } from './contexto/ProdutosSelecionados/ProdutosSelecionadosProvider';
 
 function App() {
-  const [filtro, setFiltro] = useState(null);
-
-  const secoes = Array.from(new Set(produtos.map((prod) => prod.secao)));
-
-  const obterProdutosSecao = (secao) => {
-    return produtos.filter((p) => p.secao === secao);
-  };
-
-  const obterSubSecoes = (secao) => {
-    const produtosComSubSecoes = obterProdutosSecao(secao).filter((p) => p.subSecao);
-
-    return Array.from(new Set(produtosComSubSecoes.map((p) => p.subSecao)));
-  };
-
-  const obterSecoesFiltradas = () => {
-    if (filtro) {
-      return secoes.filter((s) => s === filtro);
-    }
-    return secoes;
-  };
-
-  const handleSelecionarSecao = (secao) => {
-    if (secao === filtro) {
-      setFiltro(null);
-      return;
-    }
-    setFiltro(secao);
-  };
 
   return (
     <div className={styles.app}>
-      <ProdutosSelecionadosProvider>
-        <Header />
-        <main className={styles.main}>
-          <FiltroSecao
-            secoes={secoes}
-            secaoSelecionada={filtro}
-            onSelecionar={handleSelecionarSecao}
-          />
-
-          {obterSecoesFiltradas().map((secao) => (
-            <Secao
-              key={secao}
-              nome={secao}
-              produtos={obterProdutosSecao(secao)}
-              subSecoes={obterSubSecoes(secao)}
-            />
-          ))}
-        </main>
-        <Footer />
-      </ProdutosSelecionadosProvider>
+      <BrowserRouter>
+        <ProdutosSelecionadosProvider>
+          <Header />
+            <main className={styles.main}>
+              <Router />
+            </main>
+          <Footer />
+        </ProdutosSelecionadosProvider>
+      </BrowserRouter>
     </div>
   );
 }
