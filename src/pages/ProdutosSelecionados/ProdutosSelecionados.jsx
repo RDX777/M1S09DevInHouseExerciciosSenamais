@@ -1,4 +1,6 @@
-export const ProdutosSelecionados = (tituloProdutosSelecionados) => {
+export const ProdutosSelecionados = () => {
+
+  const tituloProdutosSelecionados = "teste"
 
   return (
     <>
